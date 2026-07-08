@@ -1,6 +1,8 @@
-Requirement already satisfied: flask in p:\internship project 26\mental health prediction\venv\lib\site-packages (3.1.3)
-Requirement already satisfied: pandas in p:\internship project 26\mental health prediction\venv\lib\site-packages (3.0.3)
-Requirement already satisfied: numpy in p:\internship project 26\mental health prediction\venv\lib\site-packages (2.4.6)
-Requirement already satisfied: scikit-learn in p:\internship project 26\mental health prediction\venv\lib\site-packages (1.9.0)
-Requirement already satisfied: matplotlib in p:\internship project 26\mental health prediction\venv\lib\site-packages (3.11.0)
-Requirement already satisfied: seaborn in p:\internship project 26\mental health prediction\venv\lib\site-packages (0.13.2)
+Flask
+pandas
+numpy
+scikit-learn
+matplotlib
+seaborn
+joblib
+gunicorn
