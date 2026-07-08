@@ -6,8 +6,8 @@ import joblib
 app = Flask(__name__)
 
 # Load trained models
-stress_model = joblib.load("stress_model.pkl")
-health_model = joblib.load("mental_health_model.pkl")
+stress_model = joblib.load("model/stress_model.pkl")
+health_model = joblib.load("model/mental_health_model.pkl")
 
 
 # Feature Engineering Function
