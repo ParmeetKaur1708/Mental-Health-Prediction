@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Mental Health & Stress Prediction</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#3b82f6,#6366f1,#8b5cf6);
+background-size:400% 400%;
+animation:bgAnimation 12s ease infinite;
+min-height:100vh;
+padding:40px 20px;
+overflow-x:hidden;
+}
+
+@keyframes bgAnimation{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+.circle1,.circle2{
+position:fixed;
+border-radius:50%;
+filter:blur(80px);
+opacity:.25;
+z-index:-1;
+}
+
+.circle1{
+width:300px;
+height:300px;
+background:#ffffff;
+top:-80px;
+left:-80px;
+}
+
+.circle2{
+width:350px;
+height:350px;
+background:#7dd3fc;
+bottom:-100px;
+right:-100px;
+}
+
+.wrapper{
+max-width:1200px;
+margin:auto;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:40px;
+align-items:center;
+}
+
+.left{
+color:white;
+}
+
+.left h1{
+font-size:48px;
+line-height:1.2;
+margin-bottom:20px;
+}
+
+.left p{
+font-size:17px;
+line-height:1.8;
+margin-bottom:25px;
+}
+
+.info-box{
+display:flex;
+gap:15px;
+margin-bottom:20px;
+background:rgba(255,255,255,.15);
+padding:18px;
+border-radius:15px;
+backdrop-filter:blur(10px);
+}
+
+.icon{
+font-size:30px;
+}
+
+.info-box h3{
+margin-bottom:5px;
+font-size:18px;
+}
+
+.info-box p{
+font-size:14px;
+margin:0;
+line-height:1.6;
+}
+
+.form-box{
+background:rgba(255,255,255,.95);
+padding:35px;
+border-radius:20px;
+box-shadow:0 15px 35px rgba(0,0,0,.2);
+}
+
+.form-box h2{
+text-align:center;
+margin-bottom:8px;
+color:#1e293b;
+}
+
+.form-box .subtitle{
+text-align:center;
+color:#64748b;
+font-size:14px;
+margin-bottom:25px;
+}
+
+.form-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+}
+
+.full{
+grid-column:1/3;
+}
+
+label{
+display:block;
+font-size:14px;
+font-weight:600;
+margin-bottom:6px;
+color:#334155;
+}
+
+input,select{
+width:100%;
+padding:12px;
+border:1px solid #d1d5db;
+border-radius:10px;
+font-size:14px;
+outline:none;
+transition:.3s;
+background:white;
+}
+
+input:focus,select:focus{
+border-color:#4f46e5;
+box-shadow:0 0 8px rgba(79,70,229,.2);
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:20px;
+border:none;
+border-radius:12px;
+background:linear-gradient(135deg,#4f46e5,#2563eb);
+color:white;
+font-size:17px;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+transform:translateY(-2px);
+box-shadow:0 10px 20px rgba(37,99,235,.35);
+}
+
+.footer-text{
+margin-top:18px;
+text-align:center;
+font-size:12px;
+color:#64748b;
+line-height:1.6;
+}
+
+@media(max-width:950px){
+
+.wrapper{
+grid-template-columns:1fr;
+}
+
+.left{
+text-align:center;
+}
+
+.left h1{
+font-size:36px;
+}
+
+}
+
+@media(max-width:650px){
+
+.form-grid{
+grid-template-columns:1fr;
+}
+
+.full{
+grid-column:1;
+}
+
+.left h1{
+font-size:30px;
+}
+
+body{
+padding:20px 15px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="circle1"></div>
+<div class="circle2"></div>
+
+<div class="wrapper">
+
+<div class="left">
+
+<h1>AI Mental Health & Stress Prediction System</h1>
+
+<p>
+Mental health is as important as physical health. Daily habits such as social media usage,
+sleep quality, study routine and physical activity can influence emotional well-being.
+This AI-powered system analyzes these behavioural factors to estimate a person's stress
+level and mental health score, encouraging awareness and healthier lifestyle choices.
+</p>
+
+<div class="info-box">
+<div class="icon">🧠</div>
+<div>
+<h3>Mental Wellness Matters</h3>
+<p>Maintaining good mental health improves productivity, decision making and overall quality of life.</p>
+</div>
+</div>
+
+<div class="info-box">
+<div class="icon">😴</div>
+<div>
+<h3>Healthy Lifestyle</h3>
+<p>Adequate sleep, balanced screen time and regular physical activity contribute to better mental well-being.</p>
+</div>
+</div>
+
+<div class="info-box">
+<div class="icon">🤖</div>
+<div>
+<h3>AI Powered Assessment</h3>
+<p>Machine Learning analyzes user behaviour patterns to predict stress levels and mental wellness scores.</p>
+</div>
+</div>
+
+</div>
+
+<div class="form-box">
+
+<h2>Predict Your Mental Wellness</h2>
+
+<p class="subtitle">
+Fill in the details below to receive your AI-generated prediction.
+</p>
+
+<form action="/predict" method="POST">
+
+<div class="form-grid">
+
+<div>
+<label>Age</label>
+<input type="number" name="Age" required>
+</div>
+
+<div>
+<label>Gender</label>
+<select name="Gender" required>
+<option value="">Select</option>
+<option value="Male">Male</option>
+<option value="Female">Female</option>
+</select>
+</div>
+
+<div class="full">
+<label>Country</label>
+<input type="text" name="Country" placeholder="Enter your country" required>
+</div>
+
+<div>
+<label>Academic Level</label>
+<select name="Academic_Level" required>
+<option value="">Select</option>
+<option value="High School">High School</option>
+<option value="Undergraduate">Undergraduate</option>
+<option value="Graduate">Graduate</option>
+</select>
+</div>
+
+<div>
+<label>Purpose of Use</label>
+<select name="Purpose_Of_Use" required>
+<option value="">Select</option>
+<option value="Networking">Networking</option>
+<option value="Education">Education</option>
+<option value="Entertainment">Entertainment</option>
+<option value="News">News</option>
+</select>
+</div>
+
+<div class="full">
+<label>Most Used Platform</label>
+<select name="Most_Used_Platform" required>
+<option value="">Select</option>
+<option>Facebook</option>
+<option>Instagram</option>
+<option>LinkedIn</option>
+<option>Snapchat</option>
+<option>Twitter</option>
+<option>YouTube</option>
+<option>TikTok</option>
+<option>LINE</option>
+<option>KakaoTalk</option>
+<option>VKontakte</option>
+<option>WhatsApp</option>
+<option>WeChat</option>
+</select>
+</div>
+
+<div>
+<label>Average Daily Usage (Hours)</label>
+<input type="number" step="0.1" name="Avg_Daily_Usage_Hours" required>
+</div>
+
+<div>
+<label>Daily Unlocks</label>
+<input type="number" name="Daily_Unlocks" required>
+</div>
+
+<div>
+<label>Study Hours</label>
+<input type="number" step="0.1" name="Study_Hours" required>
+</div>
+
+<div>
+<label>Physical Activity (Hours)</label>
+<input type="number" step="0.1" name="Physical_Activity_Hours" required>
+</div>
+
+<div class="full">
+<label>Sleep Hours Per Night</label>
+<input type="number" step="0.1" name="Sleep_Hours_Per_Night" required>
+</div>
+
+<div class="full">
+<button type="submit">Predict Mental Health</button>
+</div>
+
+</div>
+
+</form>
+
+<div class="footer-text">
+Developed using Flask & Machine Learning • Internship Project
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

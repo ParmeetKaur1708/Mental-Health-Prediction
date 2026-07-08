@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mental Health Prediction Result</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+
+body{
+
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:40px 20px;
+
+background:linear-gradient(
+135deg,
+#dbeafe,
+#ede9fe,
+#cffafe
+);
+
+background-size:400% 400%;
+animation:bgMove 12s infinite alternate;
+
+}
+
+
+@keyframes bgMove{
+
+0%{
+background-position:left;
+}
+
+100%{
+background-position:right;
+}
+
+}
+
+
+
+.container{
+
+width:900px;
+max-width:100%;
+
+background:rgba(255,255,255,0.75);
+
+backdrop-filter:blur(15px);
+
+border-radius:25px;
+
+padding:40px;
+
+box-shadow:
+0 20px 40px rgba(0,0,0,0.15);
+
+}
+
+
+
+.header{
+
+text-align:center;
+margin-bottom:35px;
+
+}
+
+
+.header h1{
+
+font-size:34px;
+color:#1e293b;
+
+}
+
+
+.header p{
+
+margin-top:10px;
+color:#64748b;
+font-size:15px;
+
+}
+
+
+
+/* Result Layout */
+
+.result-section{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:25px;
+
+align-items:center;
+
+}
+
+
+
+/* Score Circle */
+
+
+.score-card{
+
+background:white;
+
+padding:30px;
+
+border-radius:20px;
+
+text-align:center;
+
+box-shadow:
+0 10px 25px rgba(0,0,0,0.08);
+
+}
+
+
+
+.progress-circle{
+
+width:180px;
+height:180px;
+
+border-radius:50%;
+
+margin:20px auto;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+background:
+conic-gradient(
+#4f46e5 calc({{score}} * 10%),
+#e5e7eb 0%
+);
+}
+
+
+.progress-inner{
+
+width:140px;
+height:140px;
+
+background:white;
+
+border-radius:50%;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+flex-direction:column;
+
+}
+
+
+.progress-inner h2{
+
+font-size:35px;
+color:#1e293b;
+
+}
+
+
+.progress-inner span{
+
+font-size:14px;
+color:#64748b;
+
+}
+
+
+
+.status{
+
+font-size:18px;
+
+font-weight:600;
+
+color:#4f46e5;
+
+margin-top:15px;
+
+}
+
+
+
+/* Stress Card */
+
+
+.stress-card{
+
+background:white;
+
+padding:30px;
+
+border-radius:20px;
+
+box-shadow:
+0 10px 25px rgba(0,0,0,0.08);
+
+text-align:center;
+
+}
+
+
+
+.stress-title{
+
+font-size:18px;
+
+color:#64748b;
+
+margin-bottom:20px;
+
+}
+
+
+
+.stress-badge{
+
+display:inline-block;
+
+padding:15px 35px;
+
+border-radius:30px;
+
+font-size:22px;
+
+font-weight:600;
+
+color:white;
+
+background:{{stress_color}};
+
+box-shadow:0 8px 20px rgba(0,0,0,0.15);
+
+}
+
+
+
+.description{
+
+margin-top:25px;
+
+font-size:14px;
+
+color:#475569;
+
+line-height:1.7;
+
+}
+
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<div class="header">
+
+<h1>
+🧠 Mental Health Analysis Result
+</h1>
+
+<p>
+AI-powered assessment based on your lifestyle,
+sleep pattern, activity and social media behaviour.
+</p>
+
+</div>
+
+
+
+<div class="result-section">
+
+
+<div class="score-card">
+
+
+<h2>
+Mental Health Score
+</h2>
+
+
+<div class="progress-circle">
+
+
+<div class="progress-inner">
+
+<h2>{{score}}</h2>
+
+<span>
+out of 10
+</span>
+
+</div>
+
+
+</div>
+
+
+
+<div class="status">
+
+{{status}}
+
+</div>
+
+
+</div>
+
+
+
+
+<div class="stress-card">
+
+
+<h2 class="stress-title">
+Predicted Stress Level
+</h2>
+
+
+<div class="stress-badge">
+
+{{stress}}
+
+</div>
+
+
+<p class="description">
+
+Your stress level prediction is generated using
+machine learning analysis of your daily habits,
+screen usage, sleep and lifestyle patterns.
+
+</p>
+
+
+</div>
+
+
+</div>
+<br>
+
+
+<!-- Recommendation Section -->
+
+<div class="recommendation-section">
+
+<h2>
+🌿 Personalized Recommendations
+</h2>
+
+<p>
+Based on your predicted stress level, here are some suggested lifestyle improvements.
+</p>
+
+
+
+<table>
+
+<tr>
+<th>Stress Level</th>
+<th>Risk</th>
+<th>Recommended Actions</th>
+</tr>
+
+
+<tr class="{% if stress == 'Low' %}active-row{% endif %}">
+
+<td>
+🟢 Low
+</td>
+
+<td>
+Low Risk
+</td>
+
+<td>
+Maintain your current routine. Continue healthy sleep,
+exercise regularly and maintain balanced screen usage.
+</td>
+
+</tr>
+
+
+
+<tr class="{% if stress == 'Medium' %}active-row{% endif %}">
+
+<td>
+🟡 Medium
+</td>
+
+<td>
+Moderate Risk
+</td>
+
+<td>
+Reduce unnecessary screen time, improve sleep schedule,
+take short breaks during study/work and include outdoor activities.
+</td>
+
+</tr>
+
+
+
+<tr class="{% if stress == 'High' %}active-row{% endif %}">
+
+<td>
+🟠 High
+</td>
+
+<td>
+High Risk
+</td>
+
+<td>
+Focus on getting 7-8 hours of sleep, reduce excessive social media usage,
+practice relaxation techniques and maintain physical activity.
+</td>
+
+</tr>
+
+
+
+<tr class="{% if stress == 'Very High' %}active-row{% endif %}">
+
+<td>
+🔴 Very High
+</td>
+
+<td>
+Severe Risk
+</td>
+
+<td>
+Prioritize mental wellness. Improve sleep quality,
+limit prolonged screen exposure, engage in regular exercise
+and consider seeking professional guidance if required.
+</td>
+
+</tr>
+
+
+</table>
+
+
+</div>
+
+
+
+
+
+<!-- Health Tips -->
+
+
+<div class="tips-section">
+
+
+<h2>
+💡 Daily Wellness Tips
+</h2>
+
+
+
+<div class="tips-grid">
+
+
+<div class="tip-card">
+
+<h3>
+😴 Sleep
+</h3>
+
+<p>
+Aim for consistent sleep patterns and maintain
+7-8 hours of quality sleep every night.
+</p>
+
+</div>
+
+
+
+<div class="tip-card">
+
+<h3>
+📱 Digital Balance
+</h3>
+
+<p>
+Avoid excessive social media usage and take
+regular breaks from screens.
+</p>
+
+</div>
+
+
+
+
+<div class="tip-card">
+
+<h3>
+🏃 Physical Activity
+</h3>
+
+<p>
+Regular movement and exercise can improve
+mood and reduce stress levels.
+</p>
+
+</div>
+
+
+
+
+<div class="tip-card">
+
+<h3>
+🧘 Mindfulness
+</h3>
+
+<p>
+Meditation, breathing exercises and relaxation
+activities support mental wellness.
+</p>
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="button-section">
+
+<a href="/">
+
+<button>
+Check Again
+</button>
+
+</a>
+
+</div>
+
+
+
+
+
+<div class="disclaimer">
+
+
+⚠️ <b>Disclaimer:</b>
+
+This prediction is generated using a Machine Learning model
+for educational and awareness purposes only.
+It is not a medical diagnosis and should not replace professional advice.
+
+
+</div>
+<style>
+
+
+.recommendation-section{
+
+margin-top:40px;
+
+background:white;
+
+padding:30px;
+
+border-radius:20px;
+
+box-shadow:
+0 10px 25px rgba(0,0,0,0.08);
+
+}
+
+
+
+.recommendation-section h2,
+.tips-section h2{
+
+text-align:center;
+
+color:#1e293b;
+
+margin-bottom:10px;
+
+}
+
+
+
+.recommendation-section p{
+
+text-align:center;
+
+color:#64748b;
+
+margin-bottom:25px;
+
+font-size:14px;
+
+}
+
+
+
+
+table{
+
+width:100%;
+
+border-collapse:collapse;
+
+overflow:hidden;
+
+border-radius:15px;
+
+}
+
+
+
+th{
+
+background:#4f46e5;
+
+color:white;
+
+padding:15px;
+
+text-align:left;
+
+font-size:14px;
+
+}
+
+
+
+td{
+
+padding:15px;
+
+border-bottom:1px solid #e5e7eb;
+
+font-size:14px;
+
+color:#334155;
+
+}
+
+
+
+tr:hover{
+
+background:#f8fafc;
+
+}
+
+
+
+/* Highlight predicted stress row */
+
+.active-row{
+
+background:#ede9fe;
+
+font-weight:600;
+
+}
+
+
+
+.tips-section{
+
+margin-top:35px;
+
+}
+
+
+
+.tips-grid{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:15px;
+
+margin-top:20px;
+
+}
+
+
+
+.tip-card{
+
+background:white;
+
+padding:20px;
+
+border-radius:15px;
+
+box-shadow:
+0 8px 20px rgba(0,0,0,0.08);
+
+transition:.3s;
+
+}
+
+
+
+.tip-card:hover{
+
+transform:translateY(-5px);
+
+}
+
+
+
+.tip-card h3{
+
+margin-bottom:10px;
+
+color:#4f46e5;
+
+}
+
+
+
+.tip-card p{
+
+font-size:13px;
+
+color:#64748b;
+
+line-height:1.6;
+
+}
+
+
+
+
+.button-section{
+
+text-align:center;
+
+margin-top:30px;
+
+}
+
+
+
+button{
+
+padding:14px 35px;
+
+border:none;
+
+border-radius:30px;
+
+background:
+linear-gradient(135deg,#4f46e5,#2563eb);
+
+color:white;
+
+font-size:16px;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+
+
+button:hover{
+
+transform:scale(1.05);
+
+box-shadow:
+0 10px 20px rgba(37,99,235,.3);
+
+}
+
+
+
+a{
+
+text-decoration:none;
+
+}
+
+
+
+
+.disclaimer{
+
+margin-top:30px;
+
+background:#fef3c7;
+
+padding:15px;
+
+border-radius:12px;
+
+font-size:13px;
+
+color:#92400e;
+
+line-height:1.6;
+
+}
+
+
+
+
+@media(max-width:900px){
+
+
+.result-section{
+
+grid-template-columns:1fr;
+
+}
+
+
+.tips-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+
+}
+
+
+
+@media(max-width:600px){
+
+
+.container{
+
+padding:20px;
+
+}
+
+
+
+.header h1{
+
+font-size:25px;
+
+}
+
+
+
+.progress-circle{
+
+width:150px;
+
+height:150px;
+
+}
+
+
+
+.progress-inner{
+
+width:115px;
+
+height:115px;
+
+}
+
+
+
+table{
+
+display:block;
+
+overflow-x:auto;
+
+}
+
+
+
+.tips-grid{
+
+grid-template-columns:1fr;
+
+}
+
+
+}
+
+
+
+</style>
+
+
+</div>
+
+
+</body>
+
+</html>
